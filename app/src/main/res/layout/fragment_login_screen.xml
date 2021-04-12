@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.LoginScreen">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g11"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/_150sdp"
+        android:minHeight="@dimen/_100sdp"
+        android:src="@drawable/ic_lab"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/g11" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/welcome_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cairo_semibold"
+        android:gravity="center"
+        android:padding="@dimen/_5sdp"
+        android:text="@string/welcome"
+        android:textColor="@color/dark_blue"
+        android:textSize="@dimen/_24ssp"
+        app:layout_constraintTop_toBottomOf="@id/logo_image" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/carve_card_background"
+        android:elevation="@dimen/_30sdp"
+        android:orientation="vertical"
+        android:padding="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_title">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/login_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo_semibold"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/login_message"
+            android:textColor="@color/dark_blue"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/login_user_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:background="@drawable/background_edittext"
+            android:drawableEnd="@drawable/ic_phone"
+            android:drawablePadding="@dimen/_10sdp"
+            android:gravity="right"
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:maxLength="11"
+
+            android:padding="@dimen/_8sdp"
+            android:textAlignment="textEnd"
+            android:textColorHint="@color/dark_blue"
+            app:drawableTint="@color/dark_blue"
+            app:layout_constraintTop_toBottomOf="@+id/login_message" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/login_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:fontFamily="@font/cairo_semibold"
+            android:paddingHorizontal="@dimen/_30sdp"
+            android:enabled="false"
+
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            app:cornerRadius="@dimen/_15sdp"
+            app:layout_constraintBottom_toTopOf="@+id/app_name_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_user_phone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/app_name_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo_bold"
+            android:gravity="bottom"
+            android:text="@string/city_lab"
+            android:textColor="@color/dark_blue"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@color/green"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/app_name_title"
+            app:layout_constraintStart_toStartOf="@+id/app_name_title"
+            app:layout_constraintTop_toBottomOf="@id/app_name_title" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

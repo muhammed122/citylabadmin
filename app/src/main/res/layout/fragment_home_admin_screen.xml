@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HomeAdminScreen">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@id/send_result_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="@dimen/_15sdp"
+        app:cardElevation="@dimen/_20sdp"
+        android:layout_margin="@dimen/_10ssp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_20sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon1"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/circle_30"
+                android:elevation="@dimen/_5sdp"
+                android:src="@drawable/ic_note"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/send_result_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="@string/send_results"
+                android:textColor="@color/dark_blue"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/icon1"
+                app:layout_constraintEnd_toStartOf="@+id/icon1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_send_result"
+                app:layout_constraintBottom_toBottomOf="@id/send_result_title"
+                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/send_result_title"
+                 />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/send_offers_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/send_result_item"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="@dimen/_15sdp"
+        app:cardElevation="@dimen/_20sdp"
+        android:layout_margin="@dimen/_10ssp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_20sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon2"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/circle_30"
+                android:elevation="@dimen/_5sdp"
+                android:src="@drawable/ic_offer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/send_offers_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="@string/send_offers"
+                android:textColor="@color/dark_blue"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/icon2"
+                app:layout_constraintEnd_toStartOf="@+id/icon2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/send_offers_title"
+                app:layout_constraintBottom_toBottomOf="@id/send_offers_title"
+                android:src="@drawable/ic_send_offers"
+                android:layout_marginEnd="@dimen/_8sdp"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/add_user_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/send_offers_item"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="@dimen/_15sdp"
+        app:cardElevation="@dimen/_20sdp"
+        android:layout_margin="@dimen/_10ssp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_20sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon3"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/circle_30"
+                android:elevation="@dimen/_5sdp"
+                android:src="@drawable/ic_add_person"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/add_user_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="@string/add_user"
+                android:textColor="@color/dark_blue"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/icon3"
+                app:layout_constraintEnd_toStartOf="@+id/icon3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/add_user_title"
+                app:layout_constraintBottom_toBottomOf="@id/add_user_title"
+                android:src="@drawable/ic_add_user"
+                android:layout_marginEnd="@dimen/_8sdp"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/show_users_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/add_user_item"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="@dimen/_15sdp"
+        app:cardElevation="@dimen/_20sdp"
+        android:layout_margin="@dimen/_10ssp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_20sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon4"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/circle_30"
+                android:elevation="@dimen/_5sdp"
+                android:src="@drawable/ic_users"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/show_user_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="@string/show_users"
+                android:textColor="@color/dark_blue"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/icon4"
+                app:layout_constraintEnd_toStartOf="@+id/icon4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_show_users"
+                app:layout_constraintBottom_toBottomOf="@+id/show_user_title"
+                app:layout_constraintEnd_toStartOf="@+id/show_user_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/show_user_title" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

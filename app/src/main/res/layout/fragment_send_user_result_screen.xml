@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.result.SendUserResultScreen"
+    android:paddingHorizontal="@dimen/_15sdp">
+
+
+    <LinearLayout
+        android:id="@+id/images_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:id="@+id/result_images_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ln1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:weightSum="4"
+        app:layout_constraintTop_toBottomOf="@+id/images_layout">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/upload_image_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_weight="0.4"
+            android:background="@drawable/upload_btn_shape"
+            android:fontFamily="@font/cairo_semibold"
+            android:text="@string/download"
+            android:textColor="@color/white" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10ssp"
+            android:layout_weight="3.6"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="@dimen/_30sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/edit_text_strock_color"
+                android:elevation="@dimen/_30sdp"
+                android:fontFamily="@font/cairo_semibold"
+                android:gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/add_image"
+                android:textColor="@color/dark_blue_icons" />
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ln2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:weightSum="4"
+        app:layout_constraintTop_toBottomOf="@+id/ln1">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/upload_pdf_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_weight="0.4"
+            android:background="@drawable/upload_btn_shape"
+            android:fontFamily="@font/cairo_semibold"
+            android:text="@string/download"
+            android:textColor="@color/white" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10ssp"
+            android:layout_weight="3.6"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="@dimen/_30sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/_30sdp"
+                android:fontFamily="@font/cairo_semibold"
+                android:gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/add_pdf"
+                android:textColor="@color/dark_blue_icons" />
+
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_weight="3.5"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_30sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ln2">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start"
+            android:background="@drawable/background_edittext"
+            android:padding="@dimen/_8sdp"
+            android:hint="@string/add_note"
+            android:textColorHint="@color/dark_blue_icons" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/user_data_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/user_data"
+        app:layout_constraintTop_toBottomOf="@+id/card2"
+        android:textSize="@dimen/_12ssp"
+        android:fontFamily="@font/cairo_semibold"
+        android:textColor="@color/dark_blue"
+        android:paddingVertical="@dimen/_10sdp"/>
+    <View
+        android:id="@+id/v22"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/user_data_title"
+        android:background="@color/dark_blue"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/userNameResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/v22"
+        android:padding="@dimen/_8sdp"
+        android:hint="@string/user_name"
+        android:textColorHint="@color/dark_blue"
+        android:background="@drawable/background_edittext"
+        android:layout_marginVertical="@dimen/_7sdp"
+        android:drawableEnd="@drawable/ic_user"
+        app:drawableTint="@color/dark_blue"
+        android:drawablePadding="@dimen/_10sdp"
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/userPhoneResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/userNameResult"
+        android:padding="@dimen/_8sdp"
+        android:hint="@string/user_phone"
+        android:gravity="right"
+        android:textColorHint="@color/dark_blue"
+        android:background="@drawable/background_edittext"
+        android:layout_marginVertical="@dimen/_7sdp"
+        android:drawableEnd="@drawable/ic_phone"
+        app:drawableTint="@color/dark_blue"
+        android:drawablePadding="@dimen/_10sdp"
+        android:inputType="phone"
+        android:textAlignment="textEnd"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/send_result_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/userPhoneResult"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="@font/cairo_semibold"
+        app:cornerRadius="@dimen/_5sdp"
+        android:text="@string/send"
+        android:backgroundTint="@color/dark_blue"
+        android:paddingHorizontal="@dimen/_30sdp"
+        android:textColor="@color/white" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

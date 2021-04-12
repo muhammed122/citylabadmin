@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/loginScreen">
+
+    <fragment
+        android:id="@+id/homeAdminScreen"
+        android:name="com.muhammed.citylabadmin.HomeAdminScreen"
+        android:label="fragment_home_admin_screen"
+        tools:layout="@layout/fragment_home_admin_screen" >
+        <action
+            android:id="@+id/action_homeAdminScreen_to_sendUserResultScreen"
+            app:destination="@id/sendUserResultScreen" />
+        <action
+            android:id="@+id/action_homeAdminScreen_to_uploadOfferScreen"
+            app:destination="@id/uploadOfferScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/sendUserResultScreen"
+        android:name="com.muhammed.citylabadmin.ui.result.SendUserResultScreen"
+        android:label="fragment_send_user_result_screen"
+        tools:layout="@layout/fragment_send_user_result_screen" />
+    <fragment
+        android:id="@+id/uploadOfferScreen"
+        android:name="com.muhammed.citylabadmin.ui.offer.UploadOfferScreen"
+        android:label="fragment_upload_offer_screen"
+        tools:layout="@layout/fragment_upload_offer_screen" />
+    <fragment
+        android:id="@+id/loginScreen"
+        android:name="com.muhammed.citylabadmin.ui.login.LoginScreen"
+        android:label="fragment_login_screen"
+        tools:layout="@layout/fragment_login_screen" >
+        <action
+            android:id="@+id/action_loginScreen_to_homeAdminScreen"
+            app:destination="@id/homeAdminScreen" />
+    </fragment>
+</navigation>

@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">City Lab Admin</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="send_results">ارسال نتايج تحاليل</string>
+    <string name="send_offers">ارسال العروض</string>
+    <string name="add_user">اضافة مستخدم</string>
+    <string name="show_users">رؤية المستخدمين</string>
+    <string name="main">الرئيسية</string>
+    <string name="add_image">تحميل صورة</string>
+    <string name="download">تحميل</string>
+    <string name="add_pdf">تحميل PDF</string>
+    <string name="add_note">اضافة ملاحظات</string>
+    <string name="user_data">بيانات المستلم</string>
+    <string name="user_name">اسم المستلم</string>
+    <string name="user_phone">رقم المستلم</string>
+    <string name="send">ارسال</string>
+    <string name="title">العنوان</string>
+    <string name="start_date">يبدا في</string>
+    <string name="end_date">ينتهي في</string>
+    <string name="old_price">السعر القديم</string>
+    <string name="new_price">السعر الجديد</string>
+    <string name="name">الاسم</string>
+    <string name="phone">رقم الهاتف</string>
+    <string name="add">اضافة</string>
+    <string name="welcome">مرحبا بك</string>
+    <string name="login_message">تسجيل الدخول</string>
+    <string name="login">تسجيل</string>
+    <string name="city_lab">City Lab</string>
+    <string name="loading">loading</string>
+    <string name="camera">كاميرا</string>
+    <string name="gallery">المعرض</string>
+</resources>
