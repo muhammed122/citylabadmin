@@ -57,14 +57,11 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
     private OfferViewModel viewModel;
     private FragmentUploadOfferScreenBinding binding;
 
-
     InputStream inputStream;
     ByteArrayOutputStream bytes;
 
 
     final Calendar myCalendar = Calendar.getInstance();
-
-
     private Date startOfferDate;
     private Date endOfferDate;
 
@@ -213,6 +210,7 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
         binding.offerImage.setImageResource(R.drawable.ic_camera);
         binding.offerNote.setText("");
         binding.offerTitle.setText("");
+        binding.removeIcon.setVisibility(View.GONE);
     }
 
     public void observe() {

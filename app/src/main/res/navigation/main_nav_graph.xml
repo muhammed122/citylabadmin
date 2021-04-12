@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeAdminScreen_to_uploadOfferScreen"
             app:destination="@id/uploadOfferScreen" />
+        <action
+            android:id="@+id/action_homeAdminScreen_to_addUserFragment"
+            app:destination="@id/addUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/sendUserResultScreen"
@@ -36,4 +39,9 @@
             android:id="@+id/action_loginScreen_to_homeAdminScreen"
             app:destination="@id/homeAdminScreen" />
     </fragment>
+    <fragment
+        android:id="@+id/addUserFragment"
+        android:name="com.muhammed.citylabadmin.ui.users.AddUserFragment"
+        android:label="fragment_add_user"
+        tools:layout="@layout/fragment_add_user" />
 </navigation>

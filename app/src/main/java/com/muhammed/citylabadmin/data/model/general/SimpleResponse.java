@@ -1,6 +1,6 @@
-package com.muhammed.citylabadmin.data.model.offer;
+package com.muhammed.citylabadmin.data.model.general;
 
-public class AddOfferResponse{
+public class SimpleResponse {
 	private Object data;
 	private String message;
 	private boolean status;

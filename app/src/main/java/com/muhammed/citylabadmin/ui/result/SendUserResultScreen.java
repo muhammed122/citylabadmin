@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.muhammed.citylabadmin.R;
 import com.muhammed.citylabadmin.base.BaseFragment;
@@ -31,6 +32,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 
 public class SendUserResultScreen extends BaseFragment
@@ -48,6 +53,7 @@ public class SendUserResultScreen extends BaseFragment
 
     List<FileData> files = new ArrayList<>();
 
+    List<MultipartBody.Part> parts ;
 
     private void initRecycler() {
         adapter = new ResultImageAdapter(this);
@@ -94,6 +100,14 @@ public class SendUserResultScreen extends BaseFragment
                 if (checkStoragePermission(MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_PDF)) {
                     pdfIntent();
                 }
+            }
+        });
+
+        binding.sendResultBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                sendResult();
             }
         });
 
@@ -210,6 +224,28 @@ public class SendUserResultScreen extends BaseFragment
     public void removeFile(int pos) {
         files.remove(pos);
         adapter.addImage(files);
+
+    }
+
+    private void sendResult(){
+        String phone = binding.userPhoneResult.getText().toString();
+        if (phone.isEmpty()) {
+            Toast.makeText(requireContext(), "ادخل البيانات", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (files.size()==0){
+            Toast.makeText(requireContext(), "ادخل النتائج", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        for (int i =0 ;i<files.size() ; i++){
+            RequestBody requestFile = RequestBody.create(files.get(i).getBytes(), MediaType.parse("image/jpeg"));
+            MultipartBody.Part body = MultipartBody.Part.createFormData("file", "image.jpg",
+                    requestFile);
+            parts.add(body);
+        }
+
+
 
     }
 }

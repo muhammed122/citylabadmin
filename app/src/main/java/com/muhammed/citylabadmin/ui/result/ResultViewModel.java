@@ -1,4 +1,4 @@
-package com.muhammed.citylabadmin.ui.offer;
+package com.muhammed.citylabadmin.ui.result;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel;
 import com.muhammed.citylabadmin.data.model.general.SimpleResponse;
 import com.muhammed.citylabadmin.helper.NetworkState;
 import com.muhammed.citylabadmin.service.RetrofitService;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -19,31 +21,31 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
 
+
 @HiltViewModel
-public class OfferViewModel extends ViewModel {
+public class ResultViewModel extends ViewModel {
+
 
     private final RetrofitService retrofitService;
 
     @Inject
-    public OfferViewModel(RetrofitService retrofitService) {
+    public ResultViewModel(RetrofitService retrofitService) {
         this.retrofitService = retrofitService;
     }
 
     private final CompositeDisposable disposable = new CompositeDisposable();
 
-    private final MutableLiveData<NetworkState> _addOfferLiveData = new MutableLiveData<NetworkState>();
-    public LiveData<NetworkState> addOfferLiveData = _addOfferLiveData;
+    private final MutableLiveData<NetworkState> _sendResultLiveData = new MutableLiveData<NetworkState>();
+    public LiveData<NetworkState> sendResultLiveData = _sendResultLiveData;
 
-    public void addOffer(MultipartBody.Part image, String title, String desc, String startDate, String  endDate,
-                         Double oldPrice, Double newPrice) {
-
-        retrofitService.uploadOffer(image, title, desc, startDate, endDate, oldPrice, newPrice)
+    public void sendResult(List<MultipartBody.Part> files, String phone) {
+        retrofitService.sendResult(files, phone)
                 .subscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<SimpleResponse>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        _addOfferLiveData.postValue(NetworkState.LOADING);
+                        _sendResultLiveData.postValue(NetworkState.LOADING);
                         disposable.add(d);
                     }
 
@@ -51,16 +53,14 @@ public class OfferViewModel extends ViewModel {
                     public void onSuccess(@NonNull SimpleResponse offerResponse) {
 
                         if (!offerResponse.isStatus())
-                            _addOfferLiveData.postValue(NetworkState.getErrorMessage(offerResponse.getMessage()));
+                            _sendResultLiveData.postValue(NetworkState.getErrorMessage(offerResponse.getMessage()));
                         else
-                            _addOfferLiveData.postValue(NetworkState.getLoaded(offerResponse.getMessage()));
-
+                            _sendResultLiveData.postValue(NetworkState.getLoaded(offerResponse.getMessage()));
                     }
-
                     @Override
                     public void onError(@NonNull Throwable e) {
 
-                        _addOfferLiveData.postValue(NetworkState.getErrorMessage(e));
+                        _sendResultLiveData.postValue(NetworkState.getErrorMessage(e));
 
 
                     }

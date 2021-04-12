@@ -64,7 +64,7 @@
             android:layout_margin="@dimen/_10ssp"
             android:layout_weight="3.6"
             app:cardCornerRadius="@dimen/_10sdp"
-            app:cardElevation="@dimen/_20sdp"
+            app:cardElevation="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
 
             app:layout_constraintStart_toStartOf="parent">
@@ -72,7 +72,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="@dimen/_30sdp"
+                android:elevation="@dimen/_8sdp"
                 android:fontFamily="@font/cairo_semibold"
                 android:gravity="center"
                 android:padding="@dimen/_5sdp"
@@ -91,6 +91,7 @@
         android:layout_marginVertical="@dimen/_7sdp"
         android:background="@drawable/background_edittext"
         android:hint="@string/title"
+        android:gravity="right"
         android:paddingHorizontal="@dimen/_10sdp"
         android:paddingVertical="@dimen/_8sdp"
         android:textColorHint="@color/dark_blue"
@@ -174,6 +175,7 @@
             android:layout_marginVertical="@dimen/_7sdp"
             android:background="@drawable/background_edittext"
             android:hint="@string/old_price"
+            android:gravity="right"
             android:inputType="number"
             android:paddingHorizontal="@dimen/_10sdp"
             android:paddingVertical="@dimen/_8sdp"
@@ -190,6 +192,7 @@
             android:layout_marginVertical="@dimen/_7sdp"
             android:background="@drawable/background_edittext"
             android:hint="@string/new_price"
+            android:gravity="right"
             android:inputType="number"
             android:paddingHorizontal="@dimen/_10sdp"
             android:paddingVertical="@dimen/_8sdp"
@@ -221,6 +224,7 @@
             android:gravity="start"
             android:hint="@string/add_note"
             android:padding="@dimen/_8sdp"
+            android:layout_gravity="right"
             android:textColorHint="@color/dark_blue_icons" />
 
     </androidx.cardview.widget.CardView>
