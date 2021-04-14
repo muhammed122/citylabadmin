@@ -8,10 +8,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -24,8 +27,10 @@ import com.muhammed.citylabadmin.R;
 import com.muhammed.citylabadmin.base.BaseFragment;
 import com.muhammed.citylabadmin.databinding.FragmentSendUserResultScreenBinding;
 import com.muhammed.citylabadmin.helper.FileData;
-import com.muhammed.citylabadmin.ui.adapter.ResultFileClickListener;
-import com.muhammed.citylabadmin.ui.adapter.ResultImageAdapter;
+import com.muhammed.citylabadmin.helper.LoadingDialog;
+import com.muhammed.citylabadmin.helper.NetworkState;
+import com.muhammed.citylabadmin.ui.adapter.result.ResultFileClickListener;
+import com.muhammed.citylabadmin.ui.adapter.result.ResultImageAdapter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -33,15 +38,19 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 
+@AndroidEntryPoint
 public class SendUserResultScreen extends BaseFragment
         implements PopupMenu.OnMenuItemClickListener, ResultFileClickListener {
 
     private FragmentSendUserResultScreenBinding binding;
+    private ResultViewModel viewModel;
+
 
     InputStream inputStream;
     ByteArrayOutputStream bytes;
@@ -52,8 +61,7 @@ public class SendUserResultScreen extends BaseFragment
 
 
     List<FileData> files = new ArrayList<>();
-
-    List<MultipartBody.Part> parts ;
+    List<MultipartBody.Part> parts;
 
     private void initRecycler() {
         adapter = new ResultImageAdapter(this);
@@ -84,6 +92,11 @@ public class SendUserResultScreen extends BaseFragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentSendUserResultScreenBinding.bind(view);
+
+        binding.toolbar.toolbarTitle.setText(getString(R.string.send_results));
+
+
+        viewModel = new ViewModelProvider(this).get(ResultViewModel.class);
         initRecycler();
 
         binding.uploadImageBtn.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +106,7 @@ public class SendUserResultScreen extends BaseFragment
 
             }
         });
+        observe();
 
         binding.uploadPdfBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,7 +185,8 @@ public class SendUserResultScreen extends BaseFragment
         if (resultCode == Activity.RESULT_OK) {
             if (data.getData() != null) {
                 try {
-                    inputStream = getActivity().getContentResolver().openInputStream(data.getData());
+                    inputStream = getActivity().getContentResolver()
+                            .openInputStream(data.getData());
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -220,6 +235,42 @@ public class SendUserResultScreen extends BaseFragment
 
     }
 
+    private void observe() {
+        viewModel.sendResultLiveData.observe(getViewLifecycleOwner(), new Observer<NetworkState>() {
+            @Override
+            public void onChanged(NetworkState networkState) {
+
+                Log.d("dddddd", "onChanged: " + networkState.message);
+                switch (networkState.status) {
+                    case SUCCESS:
+                        LoadingDialog.hideDialog();
+                        restAllWidgets();
+                        Toast.makeText(requireContext(), "" + networkState.data.toString(),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case FAILED:
+                        LoadingDialog.hideDialog();
+                        Toast.makeText(requireContext(), "" + networkState.message.toString(),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+
+                    default:
+                        LoadingDialog.showDialog(requireActivity());
+                        break;
+
+
+                }
+
+
+            }
+        });
+
+
+    }
+
+    private void restAllWidgets() {
+    }
+
     @Override
     public void removeFile(int pos) {
         files.remove(pos);
@@ -227,24 +278,34 @@ public class SendUserResultScreen extends BaseFragment
 
     }
 
-    private void sendResult(){
+    private void sendResult() {
         String phone = binding.userPhoneResult.getText().toString();
         if (phone.isEmpty()) {
             Toast.makeText(requireContext(), "ادخل البيانات", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (files.size()==0){
+        if (files.size() == 0) {
             Toast.makeText(requireContext(), "ادخل النتائج", Toast.LENGTH_SHORT).show();
             return;
         }
+        parts = new ArrayList<>();
 
-        for (int i =0 ;i<files.size() ; i++){
-            RequestBody requestFile = RequestBody.create(files.get(i).getBytes(), MediaType.parse("image/jpeg"));
-            MultipartBody.Part body = MultipartBody.Part.createFormData("file", "image.jpg",
-                    requestFile);
-            parts.add(body);
+        List<String> base64 = new ArrayList<>();
+
+        for (int i = 0; i < files.size(); i++) {
+//            Log.d("dddddddddd", "sendResult: "+i);
+//            RequestBody requestFile = RequestBody.create(files.get(i).getBytes(), MediaType.parse("image/jpeg"));
+//            MultipartBody.Part body = MultipartBody.Part.createFormData("Files", "image.jpg",
+//                    requestFile);
+
+            String image = Base64.encodeToString(files.get(i).getBytes(), 1);
+            base64.add(image);
+
+
+            // parts.add(body);
         }
 
+        viewModel.sendResult(base64, phone);
 
 
     }

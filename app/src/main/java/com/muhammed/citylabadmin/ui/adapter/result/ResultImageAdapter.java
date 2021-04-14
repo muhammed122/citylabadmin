@@ -1,4 +1,4 @@
-package com.muhammed.citylabadmin.ui.adapter;
+package com.muhammed.citylabadmin.ui.adapter.result;
 
 import android.view.LayoutInflater;
 import android.view.View;

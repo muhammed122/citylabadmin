@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeAdminScreen_to_addUserFragment"
             app:destination="@id/addUserFragment" />
+        <action
+            android:id="@+id/action_homeAdminScreen_to_usersScreen"
+            app:destination="@id/usersScreen" />
     </fragment>
     <fragment
         android:id="@+id/sendUserResultScreen"
@@ -44,4 +47,9 @@
         android:name="com.muhammed.citylabadmin.ui.users.AddUserFragment"
         android:label="fragment_add_user"
         tools:layout="@layout/fragment_add_user" />
+    <fragment
+        android:id="@+id/usersScreen"
+        android:name="com.muhammed.citylabadmin.ui.users.UsersScreen"
+        android:label="fragment_users_screen"
+        tools:layout="@layout/fragment_users_screen" />
 </navigation>

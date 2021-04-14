@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.result.SendUserResultScreen"
-    android:paddingHorizontal="@dimen/_15sdp">
+    tools:context=".ui.result.SendUserResultScreen">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <LinearLayout
         android:id="@+id/images_layout"
@@ -15,7 +18,8 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="3"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
 
 
@@ -33,6 +37,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:weightSum="4"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+
         app:layout_constraintTop_toBottomOf="@+id/images_layout">
 
         <androidx.appcompat.widget.AppCompatButton
@@ -51,7 +57,7 @@
             android:layout_margin="@dimen/_10ssp"
             android:layout_weight="3.6"
             app:cardCornerRadius="@dimen/_10sdp"
-            app:cardElevation="@dimen/_30sdp"
+            app:cardElevation="@dimen/_5sdp"
             app:layout_constraintEnd_toEndOf="parent"
 
             app:layout_constraintStart_toStartOf="parent">
@@ -60,7 +66,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/edit_text_strock_color"
-                android:elevation="@dimen/_30sdp"
                 android:fontFamily="@font/cairo_semibold"
                 android:gravity="center"
                 android:padding="@dimen/_5sdp"
@@ -79,7 +84,9 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:weightSum="4"
-        app:layout_constraintTop_toBottomOf="@+id/ln1">
+        app:layout_constraintTop_toBottomOf="@+id/ln1"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        >
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/upload_pdf_btn"
@@ -97,7 +104,7 @@
             android:layout_margin="@dimen/_10ssp"
             android:layout_weight="3.6"
             app:cardCornerRadius="@dimen/_10sdp"
-            app:cardElevation="@dimen/_30sdp"
+            app:cardElevation="@dimen/_5sdp"
             app:layout_constraintEnd_toEndOf="parent"
 
             app:layout_constraintStart_toStartOf="parent">
@@ -105,7 +112,6 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="@dimen/_30sdp"
                 android:fontFamily="@font/cairo_semibold"
                 android:gravity="center"
                 android:padding="@dimen/_5sdp"
@@ -123,7 +129,7 @@
         android:layout_height="@dimen/_80sdp"
         android:layout_weight="3.5"
         app:cardCornerRadius="@dimen/_10sdp"
-        app:cardElevation="@dimen/_30sdp"
+        app:cardElevation="@dimen/_5sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ln2">
@@ -135,6 +141,8 @@
             android:background="@drawable/background_edittext"
             android:padding="@dimen/_8sdp"
             android:hint="@string/add_note"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+
             android:textColorHint="@color/dark_blue_icons" />
 
     </androidx.cardview.widget.CardView>
@@ -149,12 +157,15 @@
         android:textSize="@dimen/_12ssp"
         android:fontFamily="@font/cairo_semibold"
         android:textColor="@color/dark_blue"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+
         android:paddingVertical="@dimen/_10sdp"/>
     <View
         android:id="@+id/v22"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="horizontal"
+        android:layout_marginHorizontal="@dimen/_15sdp"
         app:layout_constraintTop_toBottomOf="@+id/user_data_title"
         android:background="@color/dark_blue"/>
 
@@ -164,7 +175,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/v22"
         android:padding="@dimen/_8sdp"
+        android:gravity="right"
         android:hint="@string/user_name"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+
         android:textColorHint="@color/dark_blue"
         android:background="@drawable/background_edittext"
         android:layout_marginVertical="@dimen/_7sdp"
@@ -185,6 +199,8 @@
         android:background="@drawable/background_edittext"
         android:layout_marginVertical="@dimen/_7sdp"
         android:drawableEnd="@drawable/ic_phone"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+
         app:drawableTint="@color/dark_blue"
         android:drawablePadding="@dimen/_10sdp"
         android:inputType="phone"

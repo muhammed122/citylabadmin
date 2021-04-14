@@ -69,5 +69,13 @@ public class HomeAdminScreen extends Fragment {
                 navController.navigate(R.id.action_homeAdminScreen_to_addUserFragment);
             }
         });
+
+
+        binding.showUsersItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_homeAdminScreen_to_usersScreen);
+            }
+        });
     }
 }

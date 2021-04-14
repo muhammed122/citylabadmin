@@ -6,9 +6,11 @@ import com.muhammed.citylabadmin.data.model.login.UserData;
 import com.muhammed.citylabadmin.data.model.user.UsersResponse;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -16,6 +18,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 
 public interface RetrofitService {
 
@@ -36,10 +39,18 @@ public interface RetrofitService {
                                        @Part("CurrentPrice") Double newPrice);
 
 
+//    @Multipart
+//    @POST("api/offers/upload")
+//    @Headers("Accept:application/json")
+//    Single<SimpleResponse> sendResult(@PartMap Map<String, List<MultipartBody.Part>> Files,
+//                                      @Part("PhoneNumber") String phone);
+
+
+    @FormUrlEncoded
     @POST("api/offers/upload")
     @Headers("Accept:application/json")
-    Single<SimpleResponse> sendResult(@Part List<MultipartBody.Part> files,
-                                      @Part("phone") String phone);
+    Single<SimpleResponse> sendResult(@Field("Files") List<String> files,
+                                      @Field("PhoneNumber") String phone);
 
 
     @FormUrlEncoded
@@ -50,6 +61,6 @@ public interface RetrofitService {
 
     @GET("api/users/all")
     @Headers("Accept:application/json")
-    Single<UsersResponse>getAllUsers();
+    Single<UsersResponse> getAllUsers();
 
 }

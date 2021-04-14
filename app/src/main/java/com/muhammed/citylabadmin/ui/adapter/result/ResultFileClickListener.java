@@ -1,4 +1,4 @@
-package com.muhammed.citylabadmin.ui.adapter;
+package com.muhammed.citylabadmin.ui.adapter.result;
 
 public interface ResultFileClickListener {
 

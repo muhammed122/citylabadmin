@@ -38,7 +38,7 @@ public class LoginViewModel extends ViewModel {
 
         retrofitService.userLogin(phone)
                 .subscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<LoginResponse>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {

@@ -8,7 +8,9 @@ import com.muhammed.citylabadmin.data.model.general.SimpleResponse;
 import com.muhammed.citylabadmin.helper.NetworkState;
 import com.muhammed.citylabadmin.service.RetrofitService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,6 +22,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 
 @HiltViewModel
@@ -38,10 +41,13 @@ public class ResultViewModel extends ViewModel {
     private final MutableLiveData<NetworkState> _sendResultLiveData = new MutableLiveData<NetworkState>();
     public LiveData<NetworkState> sendResultLiveData = _sendResultLiveData;
 
-    public void sendResult(List<MultipartBody.Part> files, String phone) {
-        retrofitService.sendResult(files, phone)
+    public void sendResult(List<String> files, String phone) {
+
+//        Map<String,List<MultipartBody.Part>> map = new HashMap<>();
+//        map.put("Files",files);
+        retrofitService.sendResult("hhh", phone)
                 .subscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<SimpleResponse>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {

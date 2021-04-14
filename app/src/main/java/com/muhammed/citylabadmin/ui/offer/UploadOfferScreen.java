@@ -119,6 +119,8 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentUploadOfferScreenBinding.bind(view);
+        binding.toolbar.toolbarTitle.setText(getString(R.string.send_offers));
+
         viewModel = new ViewModelProvider(this).get(OfferViewModel.class);
         initDateDialog();
 

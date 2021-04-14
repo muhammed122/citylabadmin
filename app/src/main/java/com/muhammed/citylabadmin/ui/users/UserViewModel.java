@@ -37,8 +37,8 @@ public class UserViewModel extends ViewModel {
 
     public void addNewUser(String name, String phone) {
         retrofitService.addUser(name, phone)
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<SimpleResponse>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
@@ -73,14 +73,13 @@ public class UserViewModel extends ViewModel {
 
     public void getAllUsers() {
         retrofitService.getAllUsers()
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<UsersResponse>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         disposable.add(d);
                         _usersLiveData.postValue(NetworkState.LOADING);
-
                     }
                     @Override
                     public void onSuccess(@NonNull UsersResponse userData) {
@@ -92,7 +91,7 @@ public class UserViewModel extends ViewModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        _usersLiveData.postValue(NetworkState.getErrorMessage(e));
+                        _usersLiveData.postValue(NetworkState.getErrorMessage(e.getLocalizedMessage()));
                     }
                 });
 

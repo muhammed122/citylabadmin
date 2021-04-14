@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/_10sdp"
     android:background="@color/white"
     tools:context=".ui.offer.UploadOfferScreen">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/g1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.02"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -25,7 +23,10 @@
         android:src="@drawable/ic_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/g1" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:paddingHorizontal="@dimen/_10sdp"
+        />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/remove_icon"
@@ -36,7 +37,9 @@
         android:src="@drawable/ic_remove"
         app:layout_constraintStart_toStartOf="parent"
         android:visibility="gone"
-        android:layout_marginVertical="@dimen/_3sdp" />
+        android:layout_marginVertical="@dimen/_3sdp"
+        android:paddingHorizontal="@dimen/_10sdp"
+        />
 
     <LinearLayout
         android:id="@+id/ln22"
@@ -46,6 +49,8 @@
         android:gravity="center"
         android:weightSum="4"
         android:background="@color/white"
+        android:paddingHorizontal="@dimen/_10sdp"
+
         app:layout_constraintTop_toBottomOf="@+id/remove_icon">
 
         <androidx.appcompat.widget.AppCompatButton
@@ -56,7 +61,8 @@
             android:background="@drawable/upload_btn_shape"
             android:fontFamily="@font/cairo_semibold"
             android:text="@string/download"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            />
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
@@ -93,6 +99,7 @@
         android:hint="@string/title"
         android:gravity="right"
         android:paddingHorizontal="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
         android:paddingVertical="@dimen/_8sdp"
         android:textColorHint="@color/dark_blue"
         app:layout_constraintTop_toBottomOf="@+id/ln22" />
@@ -103,7 +110,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_15sdp"
-        app:layout_constraintTop_toBottomOf="@+id/offer_title">
+        app:layout_constraintTop_toBottomOf="@+id/offer_title"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        >
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/start_offer_date"
@@ -165,7 +174,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/_15sdp"
-        app:layout_constraintTop_toBottomOf="@+id/date_info">
+        app:layout_constraintTop_toBottomOf="@+id/date_info"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        >
 
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -225,7 +236,9 @@
             android:hint="@string/add_note"
             android:padding="@dimen/_8sdp"
             android:layout_gravity="right"
-            android:textColorHint="@color/dark_blue_icons" />
+            android:textColorHint="@color/dark_blue_icons"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            />
 
     </androidx.cardview.widget.CardView>
 

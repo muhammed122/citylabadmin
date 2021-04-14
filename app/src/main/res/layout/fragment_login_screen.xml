@@ -90,7 +90,6 @@
             android:fontFamily="@font/cairo_semibold"
             android:paddingHorizontal="@dimen/_30sdp"
             android:enabled="false"
-
             android:text="@string/login"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
