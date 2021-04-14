@@ -39,6 +39,7 @@ public interface RetrofitService {
                                        @Part("CurrentPrice") Double newPrice);
 
 
+
 //    @Multipart
 //    @POST("api/offers/upload")
 //    @Headers("Accept:application/json")
@@ -47,7 +48,7 @@ public interface RetrofitService {
 
 
     @FormUrlEncoded
-    @POST("api/offers/upload")
+    @POST("api/Results/Upload")
     @Headers("Accept:application/json")
     Single<SimpleResponse> sendResult(@Field("Files") List<String> files,
                                       @Field("PhoneNumber") String phone);

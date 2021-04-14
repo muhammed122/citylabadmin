@@ -209,7 +209,7 @@ public class SendUserResultScreen extends BaseFragment
                 bm = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), data.getData());
                 //add image to adapter
                 inputStream = requireContext().getContentResolver().openInputStream(data.getData());
-                files.add(new FileData(bm, getBytes(inputStream)));
+                files.add(new FileData(bm, encodeToBase64(bm)));
                 Log.d("dddddddddd", "onSelectFromGalleryResult: ");
                 adapter.addImage(files);
 
@@ -223,10 +223,10 @@ public class SendUserResultScreen extends BaseFragment
         if (data != null) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             bytes = new ByteArrayOutputStream();
-            thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+          //  thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
             //add image to adapter
-            files.add(new FileData(thumbnail, bytes.toByteArray()));
+            files.add(new FileData(thumbnail,encodeToBase64(thumbnail)));
 
             adapter.addImage(files);
 
@@ -298,9 +298,8 @@ public class SendUserResultScreen extends BaseFragment
 //            MultipartBody.Part body = MultipartBody.Part.createFormData("Files", "image.jpg",
 //                    requestFile);
 
-            String image = Base64.encodeToString(files.get(i).getBytes(), 1);
-            base64.add(image);
 
+            base64.add(files.get(i).getBytes());
 
             // parts.add(body);
         }
@@ -309,4 +308,13 @@ public class SendUserResultScreen extends BaseFragment
 
 
     }
+
+
+    public static String encodeToBase64(Bitmap image) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        return Base64.encodeToString(b, Base64.DEFAULT);
+    }
+
 }

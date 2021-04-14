@@ -45,7 +45,7 @@ public class ResultViewModel extends ViewModel {
 
 //        Map<String,List<MultipartBody.Part>> map = new HashMap<>();
 //        map.put("Files",files);
-        retrofitService.sendResult("hhh", phone)
+        retrofitService.sendResult(files.get(0), phone)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<SimpleResponse>() {
@@ -63,6 +63,7 @@ public class ResultViewModel extends ViewModel {
                         else
                             _sendResultLiveData.postValue(NetworkState.getLoaded(offerResponse.getMessage()));
                     }
+
                     @Override
                     public void onError(@NonNull Throwable e) {
 
