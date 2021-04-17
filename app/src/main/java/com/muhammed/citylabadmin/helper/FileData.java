@@ -18,7 +18,7 @@ public class FileData {
         return bitmap;
     }
 
-    public String getBytes() {
+    public String getBase64() {
         return base64;
     }
 }

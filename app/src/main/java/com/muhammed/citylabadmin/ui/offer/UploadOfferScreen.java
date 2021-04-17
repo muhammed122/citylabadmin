@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -57,6 +58,8 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
     private OfferViewModel viewModel;
     private FragmentUploadOfferScreenBinding binding;
 
+    private String imageBase64;
+
     InputStream inputStream;
     ByteArrayOutputStream bytes;
 
@@ -75,13 +78,16 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
         return new SimpleDateFormat(myFormat, Locale.US);
     }
 
+    String sOffDate = "";
+    String eOffDate = "";
+
     private void initDateDialog() {
         startDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month += 1;
-                String date = dayOfMonth + "/" + month + "/" + year;
-                binding.startOfferDate.setText(date);
+                sOffDate = dayOfMonth + "/" + month + "/" + year;
+                binding.startOfferDate.setText(sOffDate);
             }
         };
 
@@ -90,8 +96,8 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
                 month += 1;
-                String date = dayOfMonth + "/" + month + "/" + year;
-                binding.endOfferDate.setText(date);
+                eOffDate = dayOfMonth + "/" + month + "/" + year;
+                binding.endOfferDate.setText(eOffDate);
 
             }
         };
@@ -134,7 +140,7 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
         }
         String s = dfto.format(today);
 
-        Log.d("dddddd", "onViewCreated: "+s);
+        Log.d("dddddd", "onViewCreated: " + s);
 
 
         binding.startDateIcon.setOnClickListener(new View.OnClickListener() {
@@ -184,6 +190,7 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
             public void onClick(View v) {
                 binding.offerImage.setImageResource(R.drawable.ic_camera);
                 binding.removeIcon.setVisibility(View.GONE);
+                imageBase64=null;
             }
         });
         binding.uploadOfferBtn.setOnClickListener(new View.OnClickListener() {
@@ -205,14 +212,18 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
     }
 
     public void restAllWidgets() {
-        binding.startOfferDate.setText("");
-        binding.endOfferDate.setText("");
+        binding.startOfferDate.setText(getResources().getString(R.string.start_date));
+        binding.endOfferDate.setText(getResources().getString(R.string.end_date));
         binding.oldOfferPrice.setText("");
         binding.newOfferPrice.setText("");
         binding.offerImage.setImageResource(R.drawable.ic_camera);
         binding.offerNote.setText("");
         binding.offerTitle.setText("");
         binding.removeIcon.setVisibility(View.GONE);
+        imageBase64 = null;
+        sOffDate = "";
+        eOffDate = "";
+
     }
 
     public void observe() {
@@ -317,9 +328,16 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
         if (data != null) {
             try {
                 bm = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), data.getData());
+                if (bytes == null)
+                    bytes = new ByteArrayOutputStream();
+                bytes.reset();
+
+                bm.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+                imageBase64 = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT).trim();
+
                 binding.offerImage.setImageBitmap(bm);
                 binding.removeIcon.setVisibility(View.VISIBLE);
-                inputStream = requireContext().getContentResolver().openInputStream(data.getData());
+                //  inputStream = requireContext().getContentResolver().openInputStream(data.getData());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -330,7 +348,12 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
         if (data != null) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             bytes = new ByteArrayOutputStream();
-            thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+            if (bytes == null)
+                bytes = new ByteArrayOutputStream();
+            bytes.reset();
+            thumbnail.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+            imageBase64 = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT).trim();
+
 
             binding.offerImage.setImageBitmap(thumbnail);
             binding.removeIcon.setVisibility(View.VISIBLE);
@@ -354,8 +377,8 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
 
     private void uploadOfferData(byte[] imageBytes) {
         String title = Objects.requireNonNull(binding.offerTitle.getText()).toString().trim();
-        String startDate = binding.startOfferDate.getText().toString().trim();
-        String endDate = binding.endOfferDate.getText().toString().trim();
+        String startDate = sOffDate;
+        String endDate = eOffDate;
         String startPrice = Objects.requireNonNull(binding.oldOfferPrice.getText()).toString().trim();
         String endPrice = Objects.requireNonNull(binding.newOfferPrice.getText()).toString().trim();
         String desc = Objects.requireNonNull(binding.offerNote.getText()).toString().trim();
@@ -366,14 +389,11 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
             return;
         }
 
-        if (imageBytes == null) {
+        if (imageBase64 == null) {
             showToast("يجب اختيار صورة");
         } else {
-            RequestBody requestFile = RequestBody.create(imageBytes, MediaType.parse("image/jpeg"));
-            MultipartBody.Part body = MultipartBody.Part.createFormData("file", "image.jpg",
-                    requestFile);
 
-            viewModel.addOffer(body, title, desc, startDate, endDate,
+            viewModel.addOffer(imageBase64, title, desc, startDate, endDate,
                     Double.parseDouble(startPrice), Double.parseDouble(endPrice));
 
         }

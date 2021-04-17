@@ -22,6 +22,7 @@ import com.muhammed.citylabadmin.databinding.FragmentUsersScreenBinding;
 import com.muhammed.citylabadmin.helper.LoadingDialog;
 import com.muhammed.citylabadmin.helper.NetworkState;
 import com.muhammed.citylabadmin.ui.adapter.user.UserAdapter;
+import com.muhammed.citylabadmin.ui.adapter.user.UserClickListener;
 import com.muhammed.citylabadmin.ui.users.UserViewModel;
 
 import java.util.List;
@@ -30,7 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 
 @AndroidEntryPoint
-public class UsersScreen extends Fragment {
+public class UsersScreen extends Fragment implements UserClickListener {
 
 
     private FragmentUsersScreenBinding binding;
@@ -43,7 +44,7 @@ public class UsersScreen extends Fragment {
 
     private void initRecycler(){
 
-        adapter=new UserAdapter();
+        adapter=new UserAdapter(this);
         layoutManager=new LinearLayoutManager(requireContext());
         binding.usersRecycler.setLayoutManager(layoutManager);
         binding.usersRecycler.setAdapter(adapter);
@@ -109,5 +110,10 @@ public class UsersScreen extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding=null;
+    }
+
+    @Override
+    public void openWhatsApp(User user) {
+        //abdalaaah whats app
     }
 }

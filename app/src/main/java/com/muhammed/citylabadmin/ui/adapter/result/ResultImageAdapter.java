@@ -42,9 +42,7 @@ public class ResultImageAdapter extends RecyclerView.Adapter<ResultImageAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ResultImageHolder holder, int position) {
-
-        holder.image.setImageBitmap(images.get(0).getBitmap());
-
+        holder.image.setImageBitmap(images.get(position).getBitmap());
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

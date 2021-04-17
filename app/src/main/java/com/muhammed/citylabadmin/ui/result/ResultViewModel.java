@@ -1,11 +1,14 @@
 package com.muhammed.citylabadmin.ui.result;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.muhammed.citylabadmin.data.model.general.SimpleResponse;
 import com.muhammed.citylabadmin.helper.NetworkState;
+import com.muhammed.citylabadmin.helper.ResultRequest;
 import com.muhammed.citylabadmin.service.RetrofitService;
 
 import java.util.HashMap;
@@ -41,11 +44,14 @@ public class ResultViewModel extends ViewModel {
     private final MutableLiveData<NetworkState> _sendResultLiveData = new MutableLiveData<NetworkState>();
     public LiveData<NetworkState> sendResultLiveData = _sendResultLiveData;
 
-    public void sendResult(List<String> files, String phone) {
+    public void sendResult(List<String> files, String phone , String note) {
 
 //        Map<String,List<MultipartBody.Part>> map = new HashMap<>();
 //        map.put("Files",files);
-        retrofitService.sendResult(files.get(0), phone)
+
+   //     Log.d("ddddddddddddd", "sendResult: base64    :   "+files.get(0));
+
+        retrofitService.sendResult(files,phone,note)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<SimpleResponse>() {

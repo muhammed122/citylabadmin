@@ -21,6 +21,12 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
 
+    private UserClickListener userClickListener;
+
+    public UserAdapter(UserClickListener userClickListener) {
+        this.userClickListener = userClickListener;
+    }
+
     private  List<User> users = new ArrayList<>();
 
 
@@ -42,6 +48,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
         User user = users.get(position);
         holder.name.setText(user.getName());
         holder.phone.setText(user.getPhoneNumber());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userClickListener.openWhatsApp(user);
+            }
+        });
 
     }
 

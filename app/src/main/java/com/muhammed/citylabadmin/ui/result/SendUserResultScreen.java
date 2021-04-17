@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,15 +34,14 @@ import com.muhammed.citylabadmin.ui.adapter.result.ResultFileClickListener;
 import com.muhammed.citylabadmin.ui.adapter.result.ResultImageAdapter;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 
 @AndroidEntryPoint
@@ -61,7 +61,10 @@ public class SendUserResultScreen extends BaseFragment
 
 
     List<FileData> files = new ArrayList<>();
-    List<MultipartBody.Part> parts;
+    String note = "";
+
+    boolean pdfSelected = false;
+    boolean imageSelected = false;
 
     private void initRecycler() {
         adapter = new ResultImageAdapter(this);
@@ -111,8 +114,18 @@ public class SendUserResultScreen extends BaseFragment
         binding.uploadPdfBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkStoragePermission(MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_PDF)) {
-                    pdfIntent();
+
+                if (!pdfSelected) {
+                    if (checkStoragePermission(MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_PDF)) {
+                        pdfIntent();
+                    }
+                } else {
+                    files.clear();
+                    binding.ln1.setVisibility(View.VISIBLE);
+                    binding.uploadPdfBtn.setBackground(ContextCompat.getDrawable(requireContext(),
+                            R.drawable.upload_btn_shape));
+                    binding.uploadPdfBtn.setText(getResources().getString(R.string.download));
+                    pdfSelected = false;
                 }
             }
         });
@@ -139,13 +152,12 @@ public class SendUserResultScreen extends BaseFragment
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.camera_item:
-                if (checkStoragePermission(MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CAMERA)) {
-                    cameraIntent();
-                }
+                cameraIntent();
+
                 return true;
             case R.id.gallery_item:
-                if (checkStoragePermission(MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_GALLERY))
-                    galleryIntent();
+
+                galleryIntent();
                 return true;
         }
 
@@ -182,12 +194,11 @@ public class SendUserResultScreen extends BaseFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
             if (data.getData() != null) {
                 try {
                     inputStream = getActivity().getContentResolver()
                             .openInputStream(data.getData());
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -197,21 +208,53 @@ public class SendUserResultScreen extends BaseFragment
                 onSelectFromGalleryResult(data);
             else if (requestCode == REQUEST_CAMERA_CODE)
                 onCaptureImageResult(data);
+            else
+                onPdfSelected(data);
+
 
         }
     }
 
+    private void onPdfSelected(Intent data) {
+        try {
+            inputStream = requireContext().getContentResolver().openInputStream(data.getData());
+            byte[] b = getBytes(inputStream);
+            String pdfBase64 = Base64.encodeToString(b, Base64.DEFAULT);
+            files.add(new FileData(null, pdfBase64));
+
+            binding.ln1.setVisibility(View.GONE);
+            binding.uploadPdfBtn.setBackground(ContextCompat.getDrawable(requireContext(),
+                    R.drawable.remove_btn_background));
+            binding.uploadPdfBtn.setText("حذف");
+            pdfSelected = true;
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showToast("حدث خطاء");
+        }
+
+
+    }
 
     private void onSelectFromGalleryResult(Intent data) {
         Bitmap bm;
         if (data != null) {
             try {
                 bm = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), data.getData());
+                if (bytes == null)
+                    bytes = new ByteArrayOutputStream();
+                bytes.reset();
+                bm.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+                String sImage = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT).trim();
+
                 //add image to adapter
-                inputStream = requireContext().getContentResolver().openInputStream(data.getData());
-                files.add(new FileData(bm, encodeToBase64(bm)));
-                Log.d("dddddddddd", "onSelectFromGalleryResult: ");
+                //    inputStream = requireContext().getContentResolver().openInputStream(data.getData());
+                files.add(new FileData(bm, sImage));
                 adapter.addImage(files);
+
+                binding.ln2.setVisibility(View.GONE);
+                binding.uploadImageBtn.setText(getResources().getString(R.string.add));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -222,13 +265,19 @@ public class SendUserResultScreen extends BaseFragment
     private void onCaptureImageResult(Intent data) {
         if (data != null) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            bytes = new ByteArrayOutputStream();
-          //  thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+            if (bytes == null)
+                bytes = new ByteArrayOutputStream();
+            bytes.reset();
+            thumbnail.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+
+            String sImage = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT).trim();
 
             //add image to adapter
-            files.add(new FileData(thumbnail,encodeToBase64(thumbnail)));
-
+            files.add(new FileData(thumbnail, sImage));
             adapter.addImage(files);
+
+            binding.ln2.setVisibility(View.GONE);
+            binding.uploadImageBtn.setText(getResources().getString(R.string.add));
 
 
         }
@@ -239,8 +288,6 @@ public class SendUserResultScreen extends BaseFragment
         viewModel.sendResultLiveData.observe(getViewLifecycleOwner(), new Observer<NetworkState>() {
             @Override
             public void onChanged(NetworkState networkState) {
-
-                Log.d("dddddd", "onChanged: " + networkState.message);
                 switch (networkState.status) {
                     case SUCCESS:
                         LoadingDialog.hideDialog();
@@ -269,12 +316,29 @@ public class SendUserResultScreen extends BaseFragment
     }
 
     private void restAllWidgets() {
+        files.clear();
+        adapter.addImage(files);
+        binding.resultNote.setText("");
+        binding.userNameResult.setText("");
+        binding.userPhoneResult.setText("");
+        binding.ln2.setVisibility(View.VISIBLE);
+        binding.ln1.setVisibility(View.VISIBLE);
+        binding.uploadImageBtn.setText(getResources().getString(R.string.download));
+        binding.uploadPdfBtn.setBackground(ContextCompat.getDrawable(requireContext(),
+                R.drawable.upload_btn_shape));
+        binding.uploadPdfBtn.setText(getResources().getString(R.string.download));
+        pdfSelected = false;
     }
 
     @Override
     public void removeFile(int pos) {
         files.remove(pos);
         adapter.addImage(files);
+
+        if (files.size() <= 0) {
+            binding.ln2.setVisibility(View.VISIBLE);
+            binding.uploadImageBtn.setText(getResources().getString(R.string.download));
+        }
 
     }
 
@@ -288,23 +352,16 @@ public class SendUserResultScreen extends BaseFragment
             Toast.makeText(requireContext(), "ادخل النتائج", Toast.LENGTH_SHORT).show();
             return;
         }
-        parts = new ArrayList<>();
-
-        List<String> base64 = new ArrayList<>();
-
-        for (int i = 0; i < files.size(); i++) {
-//            Log.d("dddddddddd", "sendResult: "+i);
-//            RequestBody requestFile = RequestBody.create(files.get(i).getBytes(), MediaType.parse("image/jpeg"));
-//            MultipartBody.Part body = MultipartBody.Part.createFormData("Files", "image.jpg",
-//                    requestFile);
-
-
-            base64.add(files.get(i).getBytes());
-
-            // parts.add(body);
+        if (!binding.resultNote.getText().toString().isEmpty()) {
+            note = binding.resultNote.getText().toString();
         }
 
-        viewModel.sendResult(base64, phone);
+        List<String> base64 = new ArrayList<>();
+        for (int i = 0; i < files.size(); i++)
+            base64.add(files.get(i).getBase64());
+
+
+        viewModel.sendResult(base64, phone, note);
 
 
     }

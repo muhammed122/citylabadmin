@@ -34,7 +34,7 @@ public class OfferViewModel extends ViewModel {
     private final MutableLiveData<NetworkState> _addOfferLiveData = new MutableLiveData<NetworkState>();
     public LiveData<NetworkState> addOfferLiveData = _addOfferLiveData;
 
-    public void addOffer(MultipartBody.Part image, String title, String desc, String startDate, String  endDate,
+    public void addOffer(String image, String title, String desc, String startDate, String  endDate,
                          Double oldPrice, Double newPrice) {
 
         retrofitService.uploadOffer(image, title, desc, startDate, endDate, oldPrice, newPrice)

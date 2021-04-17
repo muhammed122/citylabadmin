@@ -4,6 +4,7 @@ import com.muhammed.citylabadmin.data.model.login.LoginResponse;
 import com.muhammed.citylabadmin.data.model.general.SimpleResponse;
 import com.muhammed.citylabadmin.data.model.login.UserData;
 import com.muhammed.citylabadmin.data.model.user.UsersResponse;
+import com.muhammed.citylabadmin.helper.ResultRequest;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.Map;
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -27,17 +29,16 @@ public interface RetrofitService {
     Single<LoginResponse> userLogin(@Field("PhoneNumber") String phone);
 
 
-    @Multipart
+    @FormUrlEncoded
     @POST("api/offers/upload")
     @Headers("Accept:application/json")
-    Single<SimpleResponse> uploadOffer(@Part MultipartBody.Part part,
-                                       @Part("title") String title,
-                                       @Part("description") String desc,
-                                       @Part("StartTime") String sDate,
-                                       @Part("EndTime") String eDate,
-                                       @Part("PreviousPrice") Double oldPrice,
-                                       @Part("CurrentPrice") Double newPrice);
-
+    Single<SimpleResponse> uploadOffer(@Field("Files")String image,
+                                       @Field("title") String title,
+                                       @Field("description") String desc,
+                                       @Field("StartTime") String sDate,
+                                       @Field("EndTime") String eDate,
+                                       @Field("PreviousPrice") Double oldPrice,
+                                       @Field("CurrentPrice") Double newPrice);
 
 
 //    @Multipart
@@ -51,7 +52,13 @@ public interface RetrofitService {
     @POST("api/Results/Upload")
     @Headers("Accept:application/json")
     Single<SimpleResponse> sendResult(@Field("Files") List<String> files,
-                                      @Field("PhoneNumber") String phone);
+                                      @Field("PhoneNumber") String phone,
+                                      @Field("notes") String note);
+
+
+//    @POST("api/Results/Upload")
+//    @Headers("Accept:application/json")
+//    Single<SimpleResponse> sendResult(@Body ResultRequest request);
 
 
     @FormUrlEncoded

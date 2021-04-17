@@ -30,26 +30,31 @@ public class BaseFragment extends Fragment {
     private static final String TAG = "BaseFragment";
     public static final int REQUEST_CAMERA_CODE = 101;
     public static final int REQUEST_GALLERY_CODE = 102;
+    private static final int PDF_REQUEST_CODE =103 ;
 
     //storage data
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CAMERA = 122;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_GALLERY = 123;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_PDF = 124;
 
+
     ByteArrayOutputStream bytes;
 
 
     public void cameraIntent() {
-
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA_CODE);
+        if (checkStoragePermission(MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_CAMERA)) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, REQUEST_CAMERA_CODE);
+        }
     }
 
     public void galleryIntent() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Select File"), REQUEST_GALLERY_CODE);
+        if (checkStoragePermission(MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE_GALLERY)) {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);//
+            startActivityForResult(Intent.createChooser(intent, "Select File"), REQUEST_GALLERY_CODE);
+        }
     }
 
 
@@ -57,7 +62,7 @@ public class BaseFragment extends Fragment {
         Intent intent = new Intent();
         intent.setType("application/pdf");
         intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Select File"), REQUEST_GALLERY_CODE);
+        startActivityForResult(Intent.createChooser(intent, "Select File"), PDF_REQUEST_CODE);
     }
 
 
