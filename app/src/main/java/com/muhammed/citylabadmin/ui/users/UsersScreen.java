@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -115,5 +116,16 @@ public class UsersScreen extends Fragment implements UserClickListener {
     @Override
     public void openWhatsApp(User user) {
         //abdalaaah whats app
+    }
+
+    @Override
+    public void sendResultToUser(User user) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("name",user.getName());
+        bundle.putString("phone",user.getPhoneNumber());
+
+        Navigation.findNavController(getView()).
+                navigate(R.id.action_usersScreen_to_sendUserResultScreen,bundle);
     }
 }

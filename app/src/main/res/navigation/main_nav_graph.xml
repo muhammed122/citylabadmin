@@ -27,7 +27,9 @@
         android:id="@+id/sendUserResultScreen"
         android:name="com.muhammed.citylabadmin.ui.result.SendUserResultScreen"
         android:label="fragment_send_user_result_screen"
-        tools:layout="@layout/fragment_send_user_result_screen" />
+        tools:layout="@layout/fragment_send_user_result_screen" >
+
+    </fragment>
     <fragment
         android:id="@+id/uploadOfferScreen"
         android:name="com.muhammed.citylabadmin.ui.offer.UploadOfferScreen"
@@ -54,5 +56,9 @@
         android:id="@+id/usersScreen"
         android:name="com.muhammed.citylabadmin.ui.users.UsersScreen"
         android:label="fragment_users_screen"
-        tools:layout="@layout/fragment_users_screen" />
+        tools:layout="@layout/fragment_users_screen" >
+        <action
+            android:id="@+id/action_usersScreen_to_sendUserResultScreen"
+            app:destination="@id/sendUserResultScreen" />
+    </fragment>
 </navigation>

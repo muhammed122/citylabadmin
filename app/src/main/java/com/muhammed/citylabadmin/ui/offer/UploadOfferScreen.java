@@ -81,6 +81,8 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
     String sOffDate = "";
     String eOffDate = "";
 
+
+
     private void initDateDialog() {
         startDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -111,6 +113,7 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 

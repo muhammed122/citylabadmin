@@ -56,6 +56,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
             }
         });
 
+
+        holder.sendResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userClickListener.sendResultToUser(user);
+            }
+        });
     }
 
 

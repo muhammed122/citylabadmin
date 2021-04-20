@@ -66,6 +66,9 @@ public class SendUserResultScreen extends BaseFragment
     boolean pdfSelected = false;
     boolean imageSelected = false;
 
+    String phone = "";
+    String name = "";
+
     private void initRecycler() {
         adapter = new ResultImageAdapter(this);
         layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
@@ -82,6 +85,11 @@ public class SendUserResultScreen extends BaseFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            phone = bundle.getString("phone");
+            name = bundle.getString("name");
+        }
     }
 
     @Override
@@ -97,6 +105,8 @@ public class SendUserResultScreen extends BaseFragment
         binding = FragmentSendUserResultScreenBinding.bind(view);
 
         binding.toolbar.toolbarTitle.setText(getString(R.string.send_results));
+        binding.userPhoneResult.setText(phone);
+        binding.userNameResult.setText(name);
 
 
         viewModel = new ViewModelProvider(this).get(ResultViewModel.class);

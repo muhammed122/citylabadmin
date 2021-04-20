@@ -4,5 +4,6 @@ import com.muhammed.citylabadmin.data.model.user.User;
 
 public interface UserClickListener {
 
-    public void openWhatsApp(User user);
+     void openWhatsApp(User user);
+     void sendResultToUser(User user);
 }
