@@ -166,7 +166,6 @@ public class SendUserResultScreen extends BaseFragment
 
                 return true;
             case R.id.gallery_item:
-
                 galleryIntent();
                 return true;
         }

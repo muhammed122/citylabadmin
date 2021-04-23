@@ -109,6 +109,7 @@ public class LoginScreen extends Fragment {
 
                 switch (networkState.status) {
                     case SUCCESS:
+
                         MyPreference.saveUser((UserData) networkState.data);
                         Log.d("dddddddddd", "onChanged: token " + networkState.data);
                         LoadingDialog.hideDialog();

@@ -231,9 +231,10 @@
                 android:src="@drawable/ic_show_users"
                 app:layout_constraintBottom_toBottomOf="@+id/show_user_title"
                 app:layout_constraintEnd_toStartOf="@+id/show_user_title"
+                app:layout_constraintHorizontal_bias="0.443"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/show_user_title" />
-
+                app:layout_constraintTop_toTopOf="@+id/show_user_title"
+                app:layout_constraintVertical_bias="0.3" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

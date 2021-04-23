@@ -47,7 +47,6 @@ public interface RetrofitService {
 //    Single<SimpleResponse> sendResult(@PartMap Map<String, List<MultipartBody.Part>> Files,
 //                                      @Part("PhoneNumber") String phone);
 
-
     @FormUrlEncoded
     @POST("api/Results/Upload")
     @Headers("Accept:application/json")
