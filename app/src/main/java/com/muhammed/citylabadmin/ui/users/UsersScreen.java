@@ -24,6 +24,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.ContactsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +52,7 @@ public class UsersScreen extends Fragment implements UserClickListener {
 
 
     Context context;
+    public List<User> all_user= new ArrayList<>();
     private static final int REQUEST_RUNTIME_PERMISSION = 123;
     String[] permissons = {Manifest.permission.READ_CONTACTS,
             Manifest.permission.WRITE_CONTACTS,
@@ -100,6 +103,38 @@ public class UsersScreen extends Fragment implements UserClickListener {
         initRecycler();
         userViewModel.getAllUsers();
         observe();
+
+        binding.editTextSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+
+            }
+        });
+    }
+    private void filter(String text) {
+        //new array list that will hold the filtered data
+        List<User> all_user1= new ArrayList<>();
+        //looping through existing elements
+        for (User s : all_user) {
+            //if the existing elements contains the search input
+            if (s.getName().toLowerCase().contains(text.toLowerCase()) || s.getPhoneNumber().contains(text)) {
+                //adding the element to filtered list
+                all_user1.add(s);
+            }
+        }
+
+        //calling a method of the adapter class and passing the filtered list
+        adapter.addUsers(all_user1);
     }
 
     private void observe(){
@@ -110,7 +145,7 @@ public class UsersScreen extends Fragment implements UserClickListener {
                 switch (networkState.status) {
                     case SUCCESS:
                             adapter.addUsers((List<User>) networkState.data);
-
+                        all_user=(List<User>) networkState.data;
                         LoadingDialog.hideDialog();
                         break;
                     case FAILED:
@@ -200,19 +235,16 @@ else
         }
         return false;
     }
-
     private void YourTaskNow() {
         //your task now
 
     }
-
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-
     @Override
     public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults) {
         switch (permsRequestCode) {
@@ -229,7 +261,6 @@ else
             }
         }
     }
-
     public void RequestPermission(Activity thisActivity, String[] Permission, int Code) {
         if (ContextCompat.checkSelfPermission(thisActivity,
                 Permission[0])
@@ -242,7 +273,6 @@ else
             }
         }
     }
-
     public boolean CheckPermission(Context context, String Permission) {
         if (ContextCompat.checkSelfPermission(context,
                 Permission) == PackageManager.PERMISSION_GRANTED) {
@@ -251,7 +281,6 @@ else
             return false;
         }
     }
-
     @Override
     public void sendResultToUser(User user) {
 
