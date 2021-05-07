@@ -248,7 +248,7 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
                         break;
 
                     default:
-                        LoadingDialog.showDialog(requireActivity());
+                            LoadingDialog.showDialog(requireActivity());
                         break;
 
 

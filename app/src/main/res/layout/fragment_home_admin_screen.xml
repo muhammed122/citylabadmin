@@ -19,6 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:cardCornerRadius="@dimen/_15sdp"
         app:cardElevation="@dimen/_20sdp"
+
         android:layout_margin="@dimen/_10ssp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -178,13 +179,7 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
     </androidx.cardview.widget.CardView>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/show_users_item"
         android:layout_width="0dp"
@@ -244,12 +239,6 @@
 
 
     </androidx.cardview.widget.CardView>
-
-
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

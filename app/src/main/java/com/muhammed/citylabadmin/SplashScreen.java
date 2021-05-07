@@ -18,7 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SplashScreen extends AppCompatActivity {
-    private static int SPLASH_SCREEN_TIME_OUT = 4000;
+    private static int SPLASH_SCREEN_TIME_OUT = 3000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +26,7 @@ public class SplashScreen extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.side_slide);
         animation.setInterpolator(new LinearInterpolator());
         animation.setRepeatCount(Animation.INFINITE);
-        animation.setDuration(2000);
+        animation.setDuration(1500);
         final ImageView splash = findViewById(R.id.imagelogogsplash);
         splash.startAnimation(animation);
         new Handler().postDelayed(new Runnable() {
