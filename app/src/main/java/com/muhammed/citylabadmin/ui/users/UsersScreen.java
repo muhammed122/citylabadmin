@@ -121,6 +121,7 @@ public class UsersScreen extends Fragment implements UserClickListener {
             }
         });
     }
+
     private void filter(String text) {
         //new array list that will hold the filtered data
         List<User> all_user1= new ArrayList<>();

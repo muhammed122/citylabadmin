@@ -22,14 +22,18 @@
         <action
             android:id="@+id/action_homeAdminScreen_to_usersScreen"
             app:destination="@id/usersScreen" />
+
+        <action
+            android:id="@+id/action_homeAdminScreen_to_reservationScreen"
+            app:destination="@id/reservationScreen"
+            />
     </fragment>
+
     <fragment
         android:id="@+id/sendUserResultScreen"
         android:name="com.muhammed.citylabadmin.ui.result.SendUserResultScreen"
         android:label="fragment_send_user_result_screen"
-        tools:layout="@layout/fragment_send_user_result_screen" >
-
-    </fragment>
+        tools:layout="@layout/fragment_send_user_result_screen" />
     <fragment
         android:id="@+id/uploadOfferScreen"
         android:name="com.muhammed.citylabadmin.ui.offer.UploadOfferScreen"
@@ -61,4 +65,9 @@
             android:id="@+id/action_usersScreen_to_sendUserResultScreen"
             app:destination="@id/sendUserResultScreen" />
     </fragment>
+    <fragment
+        android:id="@+id/reservationScreen"
+        android:name="com.muhammed.citylabadmin.ReservationScreen"
+        android:label="fragment_reservation_screen"
+        tools:layout="@layout/fragment_reservation_screen" />
 </navigation>

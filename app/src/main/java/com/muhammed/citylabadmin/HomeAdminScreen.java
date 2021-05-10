@@ -53,6 +53,13 @@ public class HomeAdminScreen extends Fragment {
 
             }
         });
+        binding.SeeAllResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_homeAdminScreen_to_reservationScreen);
+
+            }
+        });
 
         binding.sendResultItem.setOnClickListener(new View.OnClickListener() {
             @Override

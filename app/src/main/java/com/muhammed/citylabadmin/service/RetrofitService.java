@@ -3,6 +3,7 @@ package com.muhammed.citylabadmin.service;
 import com.muhammed.citylabadmin.data.model.login.LoginResponse;
 import com.muhammed.citylabadmin.data.model.general.SimpleResponse;
 import com.muhammed.citylabadmin.data.model.login.UserData;
+import com.muhammed.citylabadmin.data.model.reservation.Booking;
 import com.muhammed.citylabadmin.data.model.user.UsersResponse;
 import com.muhammed.citylabadmin.helper.ResultRequest;
 
@@ -12,6 +13,7 @@ import java.util.Map;
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -65,6 +67,11 @@ public interface RetrofitService {
     @Headers("Accept:application/json")
     Single<SimpleResponse> addUser(@Field("Name") String name,
                                    @Field("PhoneNumber") String phone);
+
+
+    @GET("api/Reservations/all")
+    @Headers("Accept:application/json")
+    Call<Booking> getAllReservation();
 
     @GET("api/users/all")
     @Headers("Accept:application/json")

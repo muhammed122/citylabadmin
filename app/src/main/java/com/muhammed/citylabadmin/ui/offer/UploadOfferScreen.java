@@ -88,7 +88,7 @@ public class UploadOfferScreen extends BaseFragment implements PopupMenu.OnMenuI
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month += 1;
-                sOffDate = dayOfMonth + "/" + month + "/" + year;
+                    sOffDate = dayOfMonth + "/" + month + "/" + year;
                 binding.startOfferDate.setText(sOffDate);
             }
         };
