@@ -37,12 +37,15 @@ public class ReservationViewmodle extends ViewModel {
 
     MutableLiveData<Booking> allreservation=new MediatorLiveData<>();
     public  MutableLiveData<Booking>  getAllReservation() {
+        //login
+
         retrofitService.getAllReservation().enqueue(new Callback<Booking>() {
             @Override
             public void onResponse(Call<Booking> call, Response<Booking> response) {
                 if (response.isSuccessful())
                 {
-                    Log.d("TAG", "onResponse:reservation "+response.body().getData().get(0).getmName());
+                    Log.d("TAG", "onResponse:reservation "+response.body().getMessage());
+
                     allreservation.setValue(response.body());
                 }
             }

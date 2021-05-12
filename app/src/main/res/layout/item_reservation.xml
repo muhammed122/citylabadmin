@@ -19,13 +19,24 @@
             android:layout_width="@dimen/_50sdp"
             android:layout_height="70dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/ic_user"
+            android:background="@drawable/defult"
             android:layout_gravity="center"
             />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/remove_icon_reservation"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginVertical="@dimen/_3sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:src="@drawable/ic_remove"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.019"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/offer_image" />
 
             <TextView
                 android:id="@+id/name_id_user_reservation"
@@ -68,7 +79,7 @@
                 android:textColor="#000"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.157"
+                app:layout_constraintHorizontal_bias="0.306"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,12 +88,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="اليوم الثلاثاء"
-                android:textSize="13sp"
                 android:fontFamily="@font/cairo_semibold"
+                android:text="اليوم الثلاثاء"
                 android:textColor="#000"
+                android:textSize="13sp"
                 app:layout_constraintEnd_toStartOf="@+id/phone_user_reservation"
-                app:layout_constraintHorizontal_bias="0.154"
+                app:layout_constraintHorizontal_bias="0.379"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/age_id_user_reservation" />
 
@@ -117,6 +128,7 @@
                 app:layout_constraintVertical_bias="0.512" />
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginLeft="@dimen/_15sdp"

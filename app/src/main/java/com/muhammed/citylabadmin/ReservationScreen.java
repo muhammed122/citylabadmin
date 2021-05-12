@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.muhammed.citylabadmin.data.model.reservation.Booking;
@@ -23,6 +24,7 @@ import com.muhammed.citylabadmin.data.model.user.User;
 import com.muhammed.citylabadmin.databinding.FragmentUsersScreenBinding;
 import com.muhammed.citylabadmin.helper.LoadingDialog;
 import com.muhammed.citylabadmin.helper.NetworkState;
+import com.muhammed.citylabadmin.service.RetrofitService;
 import com.muhammed.citylabadmin.ui.adapter.resvrvation.ReservationAdapter;
 import com.muhammed.citylabadmin.ui.adapter.user.UserAdapter;
 import com.muhammed.citylabadmin.ui.reservationes.ReservationViewmodle;
@@ -32,15 +34,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.HiltAndroidApp;
+import dagger.hilt.android.internal.lifecycle.HiltViewModelMap;
+import dagger.hilt.android.lifecycle.HiltViewModel;
 
 public class ReservationScreen extends Fragment {
 
-
+     RetrofitService retrofitService;
     Context context;
     public List<Datum> all_reservation= new ArrayList<>();
     private ReservationAdapter adapter ;
     private FragmentUsersScreenBinding binding;
     private ReservationViewmodle reservationViewmodle;
+    ProgressBar progressBar;
     RecyclerView recyclerView;
 
     private void initRecycler(){
@@ -48,9 +56,11 @@ public class ReservationScreen extends Fragment {
     }
 
     private RecyclerView.LayoutManager layoutManager;
+
     public ReservationScreen() {
         // Required empty public constructor
     }
+
 
 
 
@@ -72,8 +82,8 @@ public class ReservationScreen extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //binding=FragmentUsersScreenBinding.bind(view);
         recyclerView=view.findViewById(R.id.reservation_recycler);
-
-        adapter=new ReservationAdapter(getContext());
+        progressBar=view.findViewById(R.id.prograsssreservation);
+        adapter=new ReservationAdapter(getContext(),retrofitService);
         layoutManager=new LinearLayoutManager(requireContext());
         reservationViewmodle= ViewModelProviders.of(getActivity()).get(ReservationViewmodle.class);
         reservationViewmodle.getAllReservation().observe(getViewLifecycleOwner(), new Observer<Booking>() {
@@ -84,9 +94,6 @@ public class ReservationScreen extends Fragment {
                 recyclerView.setAdapter(adapter);
             }
         });
-
-
-
 
     }
 
